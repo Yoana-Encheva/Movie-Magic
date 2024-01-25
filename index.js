@@ -1,12 +1,10 @@
-const http = require("http");
+const express = require("express");
+const app = express();
+const port = 3000;
 
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { "Content-Type": "application/json" });
-  res.end(
-    JSON.stringify({
-      data: "Hello World!",
-    })
-  );
+app.get("/", (req, res) => {
+  res.status(200);
+  res.send("Welcome to Express.js");
 });
 
-server.listen(3000, () => console.log("Server is listening on port 3000..."));
+app.listen(port, () => console.log(`Express running on port:  ${port}...`));
