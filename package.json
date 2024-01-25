@@ -1,0 +1,23 @@
+{
+  "name": "movie-magic",
+  "version": "1.0.0",
+  "description": "Movie library - workshop",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yoana-Encheva/Movie-Magic.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yoana-Encheva/Movie-Magic/issues"
+  },
+  "homepage": "https://github.com/Yoana-Encheva/Movie-Magic#readme",
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
+}
