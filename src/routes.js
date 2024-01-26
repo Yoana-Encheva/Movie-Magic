@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 const staticPagesController = require("./controllers/staticPages");
-const moviesController = require("./controllers/movies");
+const moviesController = require("./controllers/movie");
 
 router.use(staticPagesController);
 router.use(moviesController);
