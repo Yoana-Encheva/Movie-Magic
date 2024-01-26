@@ -1,5 +1,5 @@
 const express = require("express");
-const router = require("express").Router();
+const routes = require("./routes");
 
 const configExpress = require("./config/configExpress");
 const configHandlebars = require("./config/configHandlebars");
@@ -10,10 +10,6 @@ const port = 3000;
 configExpress(app);
 configHandlebars(app);
 
-router.get("/", async (req, res) => {
-  res.render("home");
-});
-
-app.use(router);
+app.use(routes);
 
 app.listen(port, () => console.log(`Express running on port:  ${port}...`));
