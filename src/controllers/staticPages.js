@@ -12,7 +12,10 @@ router.get("/about", (req, res) => {
 });
 
 router.get("/search", (req, res) => {
-  res.render("search");
+  const { title, genre, year } = req.query;
+  const movieResult = movieService.search(title, genre, year);
+
+  res.render("search", { movies: movieResult, title, genre, year });
 });
 
 router.get("/404", (req, res) => {
