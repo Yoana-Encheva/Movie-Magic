@@ -10,8 +10,11 @@ router.post("/movies/create", async (req, res) => {
   res.redirect("/");
 });
 
-router.get("/movies/details/:id", async (req, res) => {
-  res.render("details");
+router.get("/movies/:movieId", async (req, res) => {
+  const movieId = req.params.movieId;
+  const movie = movieService.getOne(movieId);
+
+  res.render("details", { movie });
 });
 
 module.exports = router;
