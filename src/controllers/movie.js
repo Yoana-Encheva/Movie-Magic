@@ -7,7 +7,7 @@ router.get("/movies/create", async (req, res) => {
 
 router.post("/movies/create", async (req, res) => {
   movieService.create(req.body);
-  res.send("Movie should be created");
+  res.redirect("/");
 });
 
 router.get("/movies/details/:id", async (req, res) => {
