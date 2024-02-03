@@ -6,7 +6,7 @@ const moviesController = require("./controllers/movie");
 const castController = require("./controllers/cast");
 
 router.use(staticPagesController);
-router.use(moviesController);
+router.use("/movies", moviesController);
 router.use("/user", authController);
 router.use("/cast", castController);
 
