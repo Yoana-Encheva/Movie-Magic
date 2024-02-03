@@ -2,12 +2,18 @@ const router = require("express").Router();
 
 const movieService = require("../services/movie");
 const castService = require("../services/cast");
+const { isAuth } = require("../middlewares/auth");
 
-router.get("/movies/create", (req, res) => {
+router.get("/movies/:movieId", async (req, res) => {
+  const movie = await movieService.getOne(req.params.movieId).lean();
+  res.render("details", { movie });
+});
+
+router.get("/movies/create", isAuth, (req, res) => {
   res.render("create");
 });
 
-router.post("/movies/create", async (req, res) => {
+router.post("/movies/create", isAuth, async (req, res) => {
   try {
     await movieService.create(req.body);
     res.redirect("/");
@@ -17,18 +23,13 @@ router.post("/movies/create", async (req, res) => {
   }
 });
 
-router.get("/movies/:movieId", async (req, res) => {
-  const movie = await movieService.getOne(req.params.movieId).lean();
-  res.render("details", { movie });
-});
-
-router.get("/movies/:movieId/attach", async (req, res) => {
+router.get("/movies/:movieId/attach", isAuth, async (req, res) => {
   const movie = await movieService.getOne(req.params.movieId).lean();
   const casts = await castService.getAll().lean();
   res.render("movie/cast-attach", { ...movie, casts });
 });
 
-router.post("/movies/:movieId/attach", async (req, res) => {
+router.post("/movies/:movieId/attach", isAuth, async (req, res) => {
   const movieId = req.params.movieId;
   const castId = req.body.cast;
 
@@ -36,7 +37,7 @@ router.post("/movies/:movieId/attach", async (req, res) => {
   res.redirect(`/movies/${movieId}/attach`);
 });
 
-router.get("/movies/:movieId/edit", async (req, res) => {
+router.get("/movies/:movieId/edit", isAuth, async (req, res) => {
   const movie = await movieService.getOne(req.params.movieId).lean();
   res.render("movie/edit", { ...movie });
 });
