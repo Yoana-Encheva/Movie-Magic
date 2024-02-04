@@ -4,11 +4,6 @@ const movieService = require("../services/movie");
 const castService = require("../services/cast");
 const { isAuth } = require("../middlewares/auth");
 
-router.get("/:movieId", async (req, res) => {
-  const movie = await movieService.getOne(req.params.movieId).lean();
-  res.render("movie/details", { movie });
-});
-
 router.get("/create", isAuth, (req, res) => {
   res.render("movie/create");
 });
@@ -21,6 +16,11 @@ router.post("/create", isAuth, async (req, res) => {
     console.log(err.message);
     res.redirect("/movies/create");
   }
+});
+
+router.get("/:movieId", async (req, res) => {
+  const movie = await movieService.getOne(req.params.movieId).lean();
+  res.render("movie/details", { movie });
 });
 
 router.get("/:movieId/attach", isAuth, async (req, res) => {
