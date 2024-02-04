@@ -6,6 +6,9 @@ exports.getOne = (movieId) => Movie.findById(movieId).populate("casts");
 
 exports.create = (movie) => Movie.create(movie);
 
+exports.edit = (movieId, movieData) =>
+  Movie.findByIdAndUpdate(movieId, movieData);
+
 exports.attach = async (movieId, castId) => {
   // TODO: validate castId if exists
   // TODO: validate if cast is already added
@@ -30,3 +33,5 @@ exports.search = (title, genre, year) => {
 
   return Movie.find(query);
 };
+
+exports.delete = (movieId) => Movie.findByIdAndDelete(movieId);
