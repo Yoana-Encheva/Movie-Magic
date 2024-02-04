@@ -25,7 +25,7 @@ router.post("/create", isAuth, async (req, res) => {
 
 router.get("/:movieId", async (req, res) => {
   const movie = await movieService.getOne(req.params.movieId).lean();
-  const isOwner = movie.owner == req.user._id;
+  const isOwner = movie.owner == req.user?._id;
   res.render("movie/details", { movie, isOwner });
 });
 
