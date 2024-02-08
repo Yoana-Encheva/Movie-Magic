@@ -1,10 +1,9 @@
 const router = require("express").Router();
 
 const authService = require("../services/auth");
-
-const { extractErrorMessages, formatErrors } = require("../utils/errors");
 const emailRules = require("../validationRules/email");
 const passwordRules = require("../validationRules/password");
+const { extractErrorMessages, formatErrors } = require("../utils/errors");
 
 router.get("/register", (req, res) => {
   res.render("auth/register");
@@ -61,7 +60,8 @@ router.post("/login", async (req, res) => {
     res.cookie("auth", token);
     res.redirect("/");
   } catch (err) {
-    res.status(400).render("auth/login", { errors: extractErrorMessages(err) });
+    errors = extractErrorMessages(err);
+    res.status(400).render("auth/login", { errors: formatErrors(errors) });
   }
 });
 
