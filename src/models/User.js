@@ -1,16 +1,22 @@
 const { Schema, model, MongooseError } = require("mongoose");
 const bcrypt = require("bcrypt");
+const emailRules = require("../validationRules/email");
+const passwordRules = require("../validationRules/password");
 
 const userSchema = new Schema({
   email: {
     type: String,
-    required: true,
+    required: [true, "Email is required"],
+    trim: true,
     lowercase: true,
     unique: true,
+    validate: [emailRules.validate, emailRules.message],
   },
   password: {
     type: String,
-    required: true,
+    required: [true, "Password is required"],
+    trim: true,
+    validate: [passwordRules.validate, passwordRules.message],
   },
 });
 
